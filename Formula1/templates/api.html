@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/api.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <title>API Documentation</title>
+</head>
+
+<body>
+
+    <a href="/" class="home-btn">
+        <span class="material-symbols-outlined">
+            home
+        </span>
+    </a>
+
+    <h1>API Documentation </h1>
+    <div class="container">
+        <p>
+            Based on simple REST principles, Formula 1 Web API endpoints returns JSON metadata about Drivers and
+            Constructors from year 2018 to 2022, directly from Formula 1 Data Catalogue.
+        </p>
+        <p>
+            The base address of Web API is http://127.0.0.1:5000/api. The API provides set of endpoints, each with its
+            own unique path.
+        </p>
+        <p>
+            Data resources are accessed via standard HTTP requests in UTF-8 format to an API endpoint. Where possible,
+            Web API uses GET HTTP verbs for each action.
+        </p>
+
+
+
+
+        <h2>Getting Started <sup>&#128640;</sup></h2>
+        <p id="get-start-1">
+            This is where the magic begins! The following steps will help you to get started with your journey towards
+            creating some awesome F1 apps using the API:
+        </p>
+        <div class="list">
+            <li>
+                <span id="span-1"> Register </span> &nbsp yourself in order to start using API.
+            </li>
+            <li>
+                Once you have created registered, you will have access to the app credentials. These will be required
+                for API <span id="span-2"> authorization </span> to obtain an access token.
+            </li>
+            <li>
+                Login with your credentials and you will get your <span id="span-4"> access token.</span>
+            </li>
+            <li>
+                Use the access token in API <span id="span-3"> requests. </span>
+            </li>
+        </div>
+        <p>Follow this full tutorial to learn to how to make your first API call. </p>
+
+
+        <h2> How to Register </h2>
+        <div class="list-1">
+            <p>
+                Send <span id="span-5"> POST </span> &nbsprequest to the below url:
+            </p>
+        </div>
+        <div class="command">
+            <p>http://127.0.0.1:5000/api/signup</p>
+        </div>
+        <div class="img">
+            <img src="/static/img/register.png" alt="" width="100%">
+        </div>
+        <div class="command">
+            <p>Status code</p>
+            <p>201 : User succesfully created.</p>
+            <p>202 : User already exists. </p>
+        </div>
+        <h2>Login and generate access token <sup>&#128272</sup></h2>
+        <p>Send <span id="span-5"> POST </span> &nbsprequest to below url:</p>
+        <div class="command">
+            <p>http://127.0.0.1:5000/api/signin</p>
+        </div>
+        <p>Use your registered credentials <span id="span-1"> "username"</span> and <span id="span-1"> "password"</span>
+            as form-data KEYS and your credentials as VALUES to
+            generate access token.</p>
+        <div class="img">
+            <img src="/static/img/login.png" alt="" width="100%">
+        </div>
+        <div class="command">
+            <p>Status code:</p>
+            <p>201 : Logged in and token generated succesfully.</p>
+            <p>401 : User does not exist or fill form correctly.</p>
+            <p>403 : Wrong password</p>
+        </div>
+
+        <h2>Use token to get your account details</h2>
+        <p>Send <span id="span-5"> GET </span> request to below url:</p>
+        <div class="command">
+            <p>http://127.0.0.1:5000/user</p>
+        </div>
+        <p>Add your generated access token to the header of this request. Use <span id="span-1"> "jwt-access-token"
+            </span> as header KEY and <span id="span-1"> "your-token" </span> as header VALUE</p>
+        <div class="img">
+            <img src="/static/img/userinfo.png" alt="" width="100%">
+        </div>
+        <div class="command">
+            <p>Status code:</p>
+            <p>200 : OK</p>
+            <p>401 : Token is missing.</p>
+            <p>403 : Token is invalid.</p>
+        </div>
+        <h2>Using API endpoints</h2>
+        <p>We have exposed <span id="span-4"> 50 unique API endpoints </span> for you. You can use this endpoints with
+            access token and get JSON data from Formula 1 Data Catalogue.</p>
+        <div class="command">
+            <p>http://127.0.0.1:5000/api/Drivers2018</p>
+        </div>
+        <div class="img">
+            <img src="/static/img/data.png" alt="" width="100%">
+        </div>
+        <h2>All 50 API endpoints<sup>&#128293;</sup></h2>
+        <div class="command">
+            <div>
+                <p>/api/Drivers2018</p>
+                <p>/api/Drivers2018/name</p>
+                <p>/api/Constructors2018</p>
+                <p>/api/Constructors2018/name</p>
+                <p>/api/Podiums2018</p>
+                <p>/api/Wins2018</p>
+                <p>/api/Points2018</p>
+                <p>/api/Pole2018</p>
+                <p>/api/flaps2018</p>
+                <p>/api/driver-team2018</p>
+                <p>/api/Drivers2019</p>
+                <p>/api/Drivers2019/name</p>
+                <p>/api/Constructors2019</p>
+                <p>/api/Constructors2019/name</p>
+                <p>/api/Podiums2019</p>
+                <p>/api/Wins2019</p>
+                <p>/api/Points2019</p>
+                <p>/api/Pole2019</p>
+                <p>/api/flaps2019</p>
+                <p>/api/driver-team2019</p>
+                <p>/api/Drivers2020</p>
+                <p>/api/Drivers2020/name</p>
+                <p>/api/Constructors2020</p>
+                <p>/api/Constructors2020/name</p>
+                <p>/api/Podiums2020</p>
+            </div>
+            <div>
+                <p>/api/Wins2020</p>
+                <p>/api/Points2020</p>
+                <p>/api/Pole2020</p>
+                <p>/api/flaps2020</p>
+                <p>/api/driver-team2020</p>
+                <p>/api/Drivers2021</p>
+                <p>/api/Drivers2021/name</p>
+                <p>/api/Constructors2021</p>
+                <p>/api/Constructors2021/name</p>
+                <p>/api/Podiums2021</p>
+                <p>/api/Wins2021</p>
+                <p>/api/Points2021</p>
+                <p>/api/Pole2021</p>
+                <p>/api/flaps2021</p>
+                <p>/api/driver-team2021</p>
+                <p>/api/Drivers2022</p>
+                <p>/api/Drivers2022/name</p>
+                <p>/api/Constructors2022</p>
+                <p>/api/Constructors2022/name</p>
+                <p>/api/Podiums2022</p>
+                <p>/api/Wins2022</p>
+                <p>/api/Points2022</p>
+                <p>/api/Pole2022</p>
+                <p>/api/flaps2022</p>
+                <p>/api/driver-team2022</p>
+                
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

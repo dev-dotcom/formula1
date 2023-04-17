@@ -1,0 +1,37 @@
+{% extends 'layout_3.html' %}
+{% block content %}
+<h1>Drivers 2021</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Podiums</th>
+      <th scope="col">Wins</th>
+      <th scope="col">Points</th>
+      <th scope="col">Car</th>
+      <th scope="col">Nationality</th>
+      <th scope="col">Pole Positions</th>
+      <th scope="col">Fastest Laps</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for row in drivers2021 %}
+
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{row.0}}</td>
+      <td>{{row.1}}</td>
+      <td>{{row.2}}</td>
+      <td>{{row.3}}</td>
+      <td>{{row.4}}</td>
+      <td>{{row.5}}</td>
+      <td>{{row.6}}</td>
+      <td>{{row.7}}</td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
