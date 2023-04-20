@@ -1,5 +1,5 @@
 from Formula1 import app, mysql
-from Formula1.jwt_auth import token_required
+from Formula1.auth.jwt_auth import token_required
 from flask import jsonify
 
 

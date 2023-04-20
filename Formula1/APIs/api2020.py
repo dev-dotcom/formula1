@@ -1,6 +1,6 @@
 from Formula1 import app, mysql
 from flask import jsonify
-from Formula1.jwt_auth import token_required
+from Formula1.auth.jwt_auth import token_required
 
 @app.route('/api/Drivers2020')
 @token_required
