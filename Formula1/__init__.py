@@ -1,6 +1,7 @@
 from flask import Flask
-from flask_mysqldb import MySQL
 from logging.config import dictConfig
+import sqlite3
+import os
 
 dictConfig({
   'version': 1,
@@ -30,11 +31,11 @@ dictConfig({
 app = Flask(__name__)
 
 app.secret_key = 'many random bytes'
-app.config['MYSQL_HOST'] = 'formula1-mysql.mysql.database.azure.com'
-app.config['MYSQL_USER'] = 'dev'
-app.config['MYSQL_PASSWORD'] = 'admin@azure123'
-app.config['MYSQL_DB'] = 'Formula1'
-mysql = MySQL(app)
 
-app.logger.debug("DATABASE CONFIGURED WITH APP")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "Formula1.db")
+conn = sqlite3.connect(db_path, check_same_thread=False)
+
+
 

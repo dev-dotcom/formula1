@@ -1,4 +1,4 @@
-from Formula1 import app, mysql
+from Formula1 import app, conn
 from flask import jsonify
 from Formula1.auth.jwt_auth import token_required
 
@@ -7,7 +7,7 @@ from Formula1.auth.jwt_auth import token_required
 def get_Drivers2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT * FROM Drivers2019 ORDER BY Points DESC")
     data = cur.fetchall()
     cur.close()
@@ -33,8 +33,8 @@ def get_specificDrivers19(name,current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
     try:
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM Drivers2019 WHERE Driver_name=%s",(name,))
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Drivers2019 WHERE Driver_name=?",(name,))
         data = cur.fetchall()
         cur.close()
         driver = {
@@ -59,7 +59,7 @@ def get_specificDrivers19(name,current_user):
 def get_all_Cons_19(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT * FROM Constructors2019 ORDER BY Points DESC")
     data = cur.fetchall()
     cur.close()
@@ -83,8 +83,8 @@ def get_specific_team19(name,current_user):
     app.logger.debug("Below url is accessed by %s",user)
     try:
         name = name.upper()
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM Constructors2019 WHERE Team=%s",(name,))
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Constructors2019 WHERE Team=?",(name,))
         data = cur.fetchall()
         cur.close()
 
@@ -108,7 +108,7 @@ def get_specific_team19(name,current_user):
 def podiums2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Podiums FROM Drivers2019 ORDER BY Podiums DESC")
     data = cur.fetchall()
     cur.execute("SELECT Team,Podiums FROM Constructors2019 ORDER BY Podiums DESC")
@@ -161,7 +161,7 @@ def podiums2019(current_user):
 def wins2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Wins FROM Drivers2019 ORDER BY Wins DESC")
     data = cur.fetchall()
     cur.execute("SELECT Team,Wins FROM Constructors2019 ORDER BY Wins DESC")
@@ -214,7 +214,7 @@ def wins2019(current_user):
 def points2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Points FROM Drivers2019 ORDER BY Points DESC")
     data = cur.fetchall()
     cur.execute("SELECT Team,Points FROM Constructors2019 ORDER BY Points DESC")
@@ -267,7 +267,7 @@ def points2019(current_user):
 def pole2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Pole_Positions FROM Drivers2019 ORDER BY Pole_Positions DESC")
     data = cur.fetchall()
     cur.execute("SELECT Team,Pole_Positions FROM Constructors2019 ORDER BY Pole_Positions DESC")
@@ -320,7 +320,7 @@ def pole2019(current_user):
 def flaps2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Fastest_Laps FROM Drivers2019 ORDER BY Fastest_Laps DESC")
     data = cur.fetchall()
     cur.execute("SELECT Team,Fastest_Laps FROM Constructors2019 ORDER BY Fastest_Laps DESC")
@@ -374,7 +374,7 @@ def flaps2019(current_user):
 def info2019(current_user):
     user = current_user['username']
     app.logger.debug("Below url is accessed by %s",user)
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT Driver_name,Team FROM Drivers2019")
     data = cur.fetchall()
     

@@ -1,5 +1,5 @@
 from flask import request, jsonify, make_response
-from Formula1 import app,mysql
+from Formula1 import app,conn
 from  werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
@@ -21,11 +21,12 @@ def token_required(f):
             
             data = jwt.decode(token, app.config['SECRET_KEY'],algorithms=["HS256"])
             
-            cursor = mysql.connection.cursor()
+            cur = conn.cursor()
             
-            cursor.execute("SELECT * FROM users WHERE username = %s", (data['username'],))
+            cur.execute("SELECT * FROM users WHERE username = ?", (data['username'],))
             
-            result = cursor.fetchone()
+            result = cur.fetchone()
+            cur.close()
             if result is not None:
                 current_user = {'username': result[0], 'password': result[1], 'email' : result[2]}
             else:
@@ -39,12 +40,12 @@ def token_required(f):
 
     return decorated
 
-@app.route('/user', methods=['GET'])
+@app.route('/api/user', methods=['GET'])
 @token_required
 def get_all_users(current_user):
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM users WHERE username = %s", (current_user['username'],))
-    users = cursor.fetchone()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username = ?", (current_user['username'],))
+    users = cur.fetchone()
     
     user_data = {
         'username': users[0],
@@ -52,10 +53,10 @@ def get_all_users(current_user):
         'email': users[2]
     }
     
-    cursor.close()
+    cur.close()
     return jsonify({'users': user_data})
 
-@app.route('/signin', methods=['POST'])
+@app.route('/api/signin', methods=['POST'])
 def jwt_login():
     # creates dictionary of form data
     auth = request.form
@@ -66,10 +67,10 @@ def jwt_login():
             401,
             {'WWW-Authenticate': 'Basic realm ="Login required !!"'}
         )
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM users WHERE username = %s',(auth.get('username'),))
-    user = cursor.fetchone()
-    cursor.close()
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM users WHERE username = ?',(auth.get('username'),))
+    user = cur.fetchone()
+    cur.close()
 
     if not user:
         
@@ -91,19 +92,23 @@ def jwt_login():
         'Wrong Password. Please try again',
         403
     )
-@app.route('/signup', methods=['POST'])
+@app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.form
     username, email = data.get('username'), data.get('email')
     password = data.get('password')
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM users WHERE username = %s", (username,))
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
+    app.logger.debug("101 executed")
     user = cur.fetchone()
     if not user:
-
-        cur.execute("INSERT INTO users(username,password,email) VALUES(%s, %s, %s)",
+        app.logger.debug("Inside if")
+        cur = conn.cursor()
+        app.logger.debug("again cursor created")
+        cur.execute("""INSERT INTO users(username,password,email) VALUES(?, ?, ?)""",
                     (username,generate_password_hash(password),email))
-        mysql.connection.commit()
+        app.logger.debug("data inserted successfully")
+        conn.commit()
         cur.close()
   
         return make_response('Successfully registered.', 201)

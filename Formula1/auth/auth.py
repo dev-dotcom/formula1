@@ -1,5 +1,5 @@
 import re
-from Formula1 import app, mysql
+from Formula1 import app, conn
 from flask import render_template,request,session, url_for
 from werkzeug.utils import redirect
 
@@ -12,9 +12,9 @@ def login():
         
         username = request.form['username']
         password = request.form['password']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
-        account = cursor.fetchone()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM accounts WHERE username = ? AND password = ?', (username, password,))
+        account = cur.fetchone()
         
         if account:
             session['loggedin'] = True
@@ -65,8 +65,8 @@ def logout():
 @app.route('/login/profile')
 def profile():
     if 'loggedin' in session:
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
-        account = cursor.fetchone()
+        cur = conn.cursor()
+        cur.execute('SELECT * FROM accounts WHERE id = ?', (session['id'],))
+        account = cur.fetchone()
         return render_template('profile.html', account=account)
     return redirect(url_for('login'))

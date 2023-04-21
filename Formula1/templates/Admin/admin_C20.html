@@ -97,6 +97,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th scope="col">SNo.</th>
                     <th scope="col">Team</th>
                     <th scope="col">Points</th>
                     <th scope="col">Podiums</th>
@@ -108,6 +109,7 @@
             <tbody>
                 {% for row in constructors2020 %}
                 <tr>
+                    <th scope="row">{{loop.index}}</th>
                     <td>{{row.0}}</td>
                     <td>{{row.1}}</td>
                     <td>{{row.2}}</td>

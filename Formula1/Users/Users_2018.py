@@ -1,9 +1,9 @@
-from Formula1 import app, mysql
+from Formula1 import app, conn
 from flask import render_template
 
 @app.route('/Drivers/Drivers2018')
 def Drivers2018():
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT * FROM Drivers2018 ORDER BY Points DESC")
     data = cur.fetchall()
     cur.close()
@@ -12,7 +12,7 @@ def Drivers2018():
 
 @app.route('/Constructors/Constructors2018')
 def Constructors2018():
-    cur = mysql.connection.cursor()
+    cur = conn.cursor()
     cur.execute("SELECT * FROM Constructors2018 ORDER BY Points DESC")
     data = cur.fetchall()
     cur.close()

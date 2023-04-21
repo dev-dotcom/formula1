@@ -1,11 +1,11 @@
-from Formula1 import app, mysql
+from Formula1 import app, conn
 from flask import render_template,request, flash, session, url_for
 from werkzeug.utils import redirect
 
 @app.route('/admin/Drivers2021')
 def Index21():
     if 'loggedin' in session:
-        cur = mysql.connection.cursor()
+        cur = conn.cursor()
         cur.execute("SELECT * FROM Drivers2021 ORDER BY Points DESC")
         data = cur.fetchall()
         cur.close()
@@ -32,9 +32,9 @@ def insert21():
                 flash(f"Could not submit. Check if you have provided any empty values.")
                 return redirect('/admin/Drivers2021')
             try:
-                cur = mysql.connection.cursor()
-                cur.execute("INSERT INTO Drivers2021 (Driver_name,Podiums,Wins,Points,Team,Country,Pole_Positions,Fastest_Laps) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (name,podiums,wins,points,team,country,pp,fl))
-                mysql.connection.commit()
+                cur = conn.cursor()
+                cur.execute("INSERT INTO Drivers2021 (Driver_name,Podiums,Wins,Points,Team,Country,Pole_Positions,Fastest_Laps) VALUES (?,?,?,?,?,?,?,?)", (name,podiums,wins,points,team,country,pp,fl))
+                conn.commit()
                 flash("Data Inserted Successfully")
                 return redirect('/admin/Drivers2021')
             except:
@@ -47,9 +47,9 @@ def insert21():
 def delete21(id_data):
     if 'loggedin' in session:
         flash("Record Has Been Deleted Successfully")
-        cur = mysql.connection.cursor()
-        cur.execute("DELETE FROM Drivers2021 WHERE Driver_name=%s", (id_data,))
-        mysql.connection.commit()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM Drivers2021 WHERE Driver_name=?", (id_data,))
+        conn.commit()
         return redirect('/admin/Drivers2021')
 
     return redirect (url_for('login'))
@@ -72,12 +72,12 @@ def update21():
                 flash(f"Could not submit. Check if you have provided any empty values.")
                 return redirect('/admin/Drivers2021')
             try:
-                cur = mysql.connection.cursor()
+                cur = conn.cursor()
                 cur.execute("""
-                UPDATE Drivers2021 SET Driver_name=%s, Podiums=%s, Wins=%s, Points=%s, Team=%s, Country=%s, Pole_Positions=%s,Fastest_Laps=%s
-                WHERE Driver_name=%s
+                UPDATE Drivers2021 SET Driver_name=?, Podiums=?, Wins=?, Points=?, Team=?, Country=?, Pole_Positions=?,Fastest_Laps=?
+                WHERE Driver_name=?
                 """, (name, podiums, wins,points,team,country,pp,fl,id_data))
-                mysql.connection.commit()
+                cur = conn.cursor()
                 flash("Data Updated Successfully")
                 return redirect('/admin/Drivers2021')
             except:
@@ -89,7 +89,7 @@ def update21():
 @app.route('/admin/Constructors2021')
 def IndexC21():
     if 'loggedin' in session:
-        cur = mysql.connection.cursor()
+        cur = conn.cursor()
         cur.execute("SELECT * FROM Constructors2021 ORDER BY Points DESC")
         data = cur.fetchall()
         cur.close()
@@ -112,9 +112,9 @@ def insertC21():
                 flash(f"Could not submit. Check if you have provided any empty values.")
                 return redirect('/admin/Constructors2021')
             try:
-                cur = mysql.connection.cursor()
-                cur.execute("INSERT INTO Constructors2021 (Team,Points,Podiums,Wins,Pole_Positions,Fastest_Laps) VALUES (%s, %s, %s, %s, %s, %s)", (team,points,podiums,wins,pp,fl))
-                mysql.connection.commit()
+                cur = conn.cursor()
+                cur.execute("INSERT INTO Constructors2021 (Team,Points,Podiums,Wins,Pole_Positions,Fastest_Laps) VALUES (?,?,?,?,?,?)", (team,points,podiums,wins,pp,fl))
+                cur = conn.cursor()
                 flash("Data Inserted Successfully")
                 return redirect('/admin/Constructors2021')
             except:
@@ -126,9 +126,9 @@ def insertC21():
 def deleteC21(id_data):
     if 'loggedin' in session:
         flash("Record Has Been Deleted Successfully")
-        cur = mysql.connection.cursor()
+        cur = conn.cursor()
         cur.execute("DELETE FROM Constructors2021 WHERE Team=%s",(id_data,))
-        mysql.connection.commit()
+        cur = conn.cursor()
         return redirect('/admin/Constructors2021')
     return redirect (url_for('login'))
 
@@ -148,12 +148,12 @@ def updateC21():
                 flash(f"Could not submit. Check if you have provided any empty values.")
                 return redirect('/admin/Constructors2021')
             try:
-                cur = mysql.connection.cursor()
+                cur = conn.cursor()
                 cur.execute("""
-                UPDATE Constructors2021 SET Team=%s, Points=%s, Podiums=%s, Wins=%s,Pole_Positions=%s,Fastest_Laps=%s
-                WHERE Team=%s
+                UPDATE Constructors2021 SET Team=?, Points=?, Podiums=?, Wins=?,Pole_Positions=?,Fastest_Laps=?
+                WHERE Team=?
                 """, (team,points,podiums,wins,pp,fl,id_data))
-                mysql.connection.commit()
+                conn.commit()
                 flash("Data Updated Successfully")
                 return redirect('/admin/Constructors2021')
             except:
