@@ -31,8 +31,6 @@ COPY . /Formula1
 # the next three lines.
 
 
-RUN sudo apt-get install default-libmysqlclient-dev
-
 COPY requirements.txt /
 RUN pip install --no-cache-dir -U pip
 RUN pip install --no-cache-dir -r /requirements.txt
