@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% block title %}Drivers 2019{% endblock %}
 {% block content %}
 
 <body>
@@ -23,8 +23,6 @@
         {%endwith%}
 
 
-
-        <!-- Enter New Driver Modal -->
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -101,10 +99,6 @@
         </div>
 
 
-        <!-- End of Enter Driver Modal -->
-
-
-
 
         <table class="table table-hover">
             <thead>
@@ -143,7 +137,6 @@
                 </tr>
 
 
-                <!-- Enter New Student Modal -->
                 <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -223,9 +216,6 @@
             </tbody>
 
         </table>
-    </div>
-
-    </div>
     </div>
 
 
