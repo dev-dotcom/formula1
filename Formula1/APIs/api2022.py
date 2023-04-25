@@ -401,3 +401,5 @@ def info2022(current_user):
     })
 
     return jsonify({'Drivers - Team' : list} )
+
+    #

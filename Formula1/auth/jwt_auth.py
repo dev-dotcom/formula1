@@ -10,7 +10,7 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        # jwt is passed in the request header
+    
         if 'jwt-access-token' in request.headers:
             token = request.headers['jwt-access-token']
             
@@ -58,7 +58,7 @@ def get_all_users(current_user):
 
 @app.route('/api/signin', methods=['POST'])
 def jwt_login():
-    # creates dictionary of form data
+
     auth = request.form
 
     if not auth or not auth.get('username') or not auth.get('password'):
@@ -115,3 +115,5 @@ def signup():
     else:
 
         return make_response('User already exists. Please Log in.', 202)
+
+#

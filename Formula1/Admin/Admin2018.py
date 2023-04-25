@@ -6,7 +6,7 @@ from werkzeug.utils import redirect
 @app.route('/admin/Drivers2018')
 def Index18():
     if 'loggedin' in session:
-        # User is loggedin show them the home page
+        
         cur = conn.cursor()
         cur.execute("SELECT * FROM Drivers2018 ORDER BY Points DESC")
         data = cur.fetchall()
@@ -114,15 +114,15 @@ def insertC18():
             if team=="" or podiums=="" or wins=="" or points=="" or pp=="" or fl=="":
                 flash(f"Could not submit. Check if you have provided any empty values.")
                 return redirect('/admin/Constructors2018')
-            # try:
-            cur = conn.cursor()
-            cur.execute("INSERT INTO Constructors2018 (Team,Points,Podiums,Wins,Pole_Positions,Fastest_Laps) VALUES (?,?,?,?,?,?)", (team,points,podiums,wins,pp,fl))
-            conn.commit()
-            flash("Data Inserted Successfully")
-            return redirect('/admin/Constructors2018')
-            # except:
-            #     flash(f"{team} is already present.")
-            #     return redirect('/admin/Constructors2018')
+            try:
+                cur = conn.cursor()
+                cur.execute("INSERT INTO Constructors2018 (Team,Points,Podiums,Wins,Pole_Positions,Fastest_Laps) VALUES (?,?,?,?,?,?)", (team,points,podiums,wins,pp,fl))
+                conn.commit()
+                flash("Data Inserted Successfully")
+                return redirect('/admin/Constructors2018')
+            except:
+                flash(f"{team} is already present.")
+                return redirect('/admin/Constructors2018')
 
 
     return redirect (url_for('login'))
@@ -166,3 +166,5 @@ def updateC18():
                 flash(f"You cannot provide other team name. {team} is already present.")
                 return redirect('/admin/Constructors2018')
     return redirect (url_for('login'))
+
+#

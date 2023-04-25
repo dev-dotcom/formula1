@@ -22,3 +22,5 @@ def delete(id_data):
         conn.commit()
         return redirect('/admin/accounts')
     return redirect (url_for('login'))
+
+    #

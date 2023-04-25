@@ -6,3 +6,4 @@ from Formula1.Admin import Admin2018, Admin2019, Admin2020, Admin2021, Admin2022
 from Formula1.APIs import api2018, api2019, api2020, api2021 ,api2022
 
 
+#All relative imports. Gunicorn will run app object from here.

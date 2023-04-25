@@ -156,3 +156,5 @@ def updateC22():
                 flash(f"You cannot provide other team name. {team} is already present.")
                 return redirect('/admin/Constructors2022')
     return redirect (url_for('login'))
+
+#

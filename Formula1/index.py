@@ -9,10 +9,7 @@ def index():
 @app.route('/admin')
 def admin_index():
     if 'loggedin' in session:
-        # User is loggedin show them the home page
         return render_template('/Admin/admin_index.html', username=session['username'])
-
-    # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
 @app.route('/api')

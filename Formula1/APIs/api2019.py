@@ -408,3 +408,5 @@ def info2019(current_user):
     })
 
     return jsonify({'drivers - team' : list} )
+
+#
