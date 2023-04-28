@@ -1,3 +1,5 @@
 /logs.log
 /git.txt
 /.venv
+/Formula1/APIs/__pycache__/
+__pycache__/

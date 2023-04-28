@@ -3,8 +3,6 @@ from Formula1 import app, conn
 from flask import render_template,request,session, url_for
 from werkzeug.utils import redirect
 
-
-
 @app.route('/login', methods=['GET','POST'])
 def login():
     msg=''

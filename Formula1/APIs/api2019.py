@@ -136,10 +136,8 @@ def podiums2019(current_user):
         data[16][0] : data[16][1],
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
-        data[19][0] : data[19][1],   
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1],   
+        data[19][0] : data[19][1]  
+           
     })
     PodiumsC.append({
         data1[0][0] : data1[0][1],
@@ -190,9 +188,7 @@ def wins2019(current_user):
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
         data[19][0] : data[19][1],   
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1],   
+           
     })
     WinsC.append({
         data1[0][0] : data1[0][1],
@@ -242,10 +238,7 @@ def points2019(current_user):
         data[16][0] : data[16][1],
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
-        data[19][0] : data[19][1],   
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1],   
+        data[19][0] : data[19][1]   
     })
     PointsC.append({
         data1[0][0] : data1[0][1],
@@ -296,9 +289,7 @@ def pole2019(current_user):
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
         data[19][0] : data[19][1],   
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1],   
+
     })
     PoleC.append({
         data1[0][0] : data1[0][1],
@@ -349,9 +340,7 @@ def flaps2019(current_user):
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
         data[19][0] : data[19][1],   
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1],   
+       
     })
     flapsC.append({
         data1[0][0] : data1[0][1],
@@ -402,9 +391,7 @@ def info2019(current_user):
         data[17][0] : data[17][1],
         data[18][0] : data[18][1],
         data[19][0] : data[19][1],  
-        data[20][0] : data[20][1],   
-        data[21][0] : data[21][1],   
-        data[22][0] : data[22][1] 
+        
     })
 
     return jsonify({'drivers - team' : list} )

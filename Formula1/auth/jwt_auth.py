@@ -94,20 +94,23 @@ def jwt_login():
     )
 @app.route('/api/signup', methods=['POST'])
 def signup():
-    data = request.form
-    username, email = data.get('username'), data.get('email')
-    password = data.get('password')
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
-    app.logger.debug("101 executed")
-    user = cur.fetchone()
-    if not user:
-        app.logger.debug("Inside if")
+    if request.form['username'] == '' or request.form['password'] == '':
+        return make_response('Provide Username and Password Correctly')
+    else:
+        data = request.form
+        username, email = data.get('username'), data.get('email')
+        password = data.get('password')
         cur = conn.cursor()
-        app.logger.debug("again cursor created")
+        cur.execute("SELECT * FROM users WHERE username = ?", (username,))
+        
+        user = cur.fetchone()
+    if not user:
+        
+        cur = conn.cursor()
+        
         cur.execute("""INSERT INTO users(username,password,email) VALUES(?, ?, ?)""",
                     (username,generate_password_hash(password),email))
-        app.logger.debug("data inserted successfully")
+        
         conn.commit()
         cur.close()
   
